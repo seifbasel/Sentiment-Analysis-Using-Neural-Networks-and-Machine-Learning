@@ -12,7 +12,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import MultinomialNB
-from hebbian import Hebbian
 from madaline import MADALINE
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -119,9 +118,6 @@ madaline_model = MADALINE(input_size=X_train_tfidf.shape[1])
 madaline_model.train(X_train_tfidf.toarray(), y_train.to_numpy(), learning_rate=0.1, epochs=100)
 
 
-
-
-
 # Make predictions on the test set
 y_pred_sgd = sgd_model.predict(X_test_tfidf)
 y_pred_svm = svm_model.predict(X_test_tfidf)
@@ -155,74 +151,26 @@ accuracy_logistic = accuracy_score(y_test, y_pred_logistic)
 
 
 # Confusion Matrix 
+def print_evaluation(model_name, accuracy, y_test, y_pred):
+    print(f"\n{model_name} Model:")
+    print("Accuracy:", int(accuracy * 100), '%')
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred))
 
-print("\nLogistic Regression Model:")
-print("Accuracy:", int(accuracy_logistic * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_logistic))
-
-print("\nSGD Model:")
-print("Accuracy:", int(accuracy_sgd * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_sgd))
-
-print("\nSVM Model:")
-print("Accuracy:", int(accuracy_svm * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_svm))
-
-print("\nk-NN Model:")
-print("Accuracy:", int(accuracy_knn * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_knn))
-
-print("\nRandom Forest Model:")
-print("Accuracy:", int(accuracy_rf * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_rf))
-
-print("\nDecision Tree Model:")
-print("Accuracy:", int(accuracy_dt * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_dt))
-
-print("\nGradient Boosting Model:")
-print("Accuracy:", int(accuracy_gb * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_gb))
-
-print("\nNaive Bayes Model:")
-print("Accuracy:", int(accuracy_nb * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_nb))
-
-print("\nPerceptron Model:")
-print("Accuracy:", int(accuracy_perceptron * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_perceptron))
-
-print("\nMLP Feedforward Model:")
-print("Accuracy:", int(accuracy_mlp_feedforward * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_mlp_feedforward))
-
-print("\nMLP Backpropagation Model:")
-print("Accuracy:", int(accuracy_mlp_backpropagation * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_mlp_backpropagation))
-
-print("\nAdaline Model:")
-print("Accuracy:", int(accuracy_adaline * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_adaline))
-
-print("\nMADALINE Model:")
-print("Accuracy:", int(accuracy_madaline * 100), '%')
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred_madaline))
-
-
-
+# Print evaluation metrics for each model
+print_evaluation("Logistic Regression", accuracy_logistic, y_test, y_pred_logistic)
+print_evaluation("SGD", accuracy_sgd, y_test, y_pred_sgd)
+print_evaluation("SVM", accuracy_svm, y_test, y_pred_svm)
+print_evaluation("k-NN", accuracy_knn, y_test, y_pred_knn)
+print_evaluation("Random Forest", accuracy_rf, y_test, y_pred_rf)
+print_evaluation("Decision Tree", accuracy_dt, y_test, y_pred_dt)
+print_evaluation("Gradient Boosting", accuracy_gb, y_test, y_pred_gb)
+print_evaluation("Naive Bayes", accuracy_nb, y_test, y_pred_nb)
+print_evaluation("Perceptron", accuracy_perceptron, y_test, y_pred_perceptron)
+print_evaluation("MLP Feedforward", accuracy_mlp_feedforward, y_test, y_pred_mlp_feedforward)
+print_evaluation("MLP Backpropagation", accuracy_mlp_backpropagation, y_test, y_pred_mlp_backpropagation)
+print_evaluation("Adaline", accuracy_adaline, y_test, y_pred_adaline)
+print_evaluation("MADALINE", accuracy_madaline, y_test, y_pred_madaline)
 
 
 
@@ -247,105 +195,32 @@ for i, y_pred in enumerate([ y_pred_perceptron, y_pred_mlp_feedforward, y_pred_m
 
 
 new_reviews = [
-    "This dress is amazing I love it",
-    "very good quality",
-    "good fit",
     "nice product",
-    "loved it",
-    "The quality is very poor.",
-    "the fit is bad",
-    "i dont like it",
-    "not worth money",
+    "good quality ",
+    "very bad",
     "bad quality",
 ]
 
 # Print the predictions using all models
+def print_predictions(model_name, predictions):
+    print(f"\nPredictions using {model_name} Model:")
+    for review, prediction in zip(new_reviews, predictions):
+        sentiment = "Positive" if prediction == 1 else "Negative"
+        print("Review:", review)
+        print("Predicted Sentiment:", sentiment)
+        print()
 
-print("\nPredictions using Perceptron Model:")
-for review, prediction in zip(new_reviews, y_pred_perceptron):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-
-print("\nPredictions using MLP Feedforward Model:")
-for review, prediction in zip(new_reviews, y_pred_mlp_feedforward):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-
-print("\nPredictions using MLP Backpropagation Model:")
-for review, prediction in zip(new_reviews, y_pred_mlp_backpropagation):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()    
-
-
-print("\nPredictions using Adaline Model:")
-for review, prediction in zip(new_reviews, y_pred_adaline):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-    
-print("\nPredictions using Madaline Model:")
-for review, prediction in zip(new_reviews, y_pred_madaline):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-print("\nPredictions using knn Model:")
-for review, prediction in zip(new_reviews, y_pred_knn):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-print("\nPredictions using svm Model:")
-for review, prediction in zip(new_reviews, y_pred_svm):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-print("\nPredictions using decestion tree Model:")
-for review, prediction in zip(new_reviews, y_pred_dt):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-print("\nPredictions using Logistic Regression Model:")
-for review, prediction in zip(new_reviews, y_pred_logistic):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-print("\nPredictions using random forest  Model:")
-for review, prediction in zip(new_reviews, y_pred_rf):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-
-print("\nPredictions using SGDClassifier  Model:")
-for review, prediction in zip(new_reviews, y_pred_sgd):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
-
-
-print("\nPredictions using GradientBoostingClassifier  Model:")
-for review, prediction in zip(new_reviews, y_pred_gb):
-    sentiment = "Positive" if prediction == 1 else "Negative"
-    print("Review:", review)
-    print("Predicted Sentiment:", sentiment)
-    print()
+# Print predictions for each model
+print_predictions("Perceptron", y_pred_perceptron)
+print_predictions("MLP Feedforward", y_pred_mlp_feedforward)
+print_predictions("MLP Backpropagation", y_pred_mlp_backpropagation)
+print_predictions("Adaline", y_pred_adaline)
+print_predictions("Madaline", y_pred_madaline)
+print_predictions("KNN", y_pred_knn)
+print_predictions("SVM", y_pred_svm)
+print_predictions("Decision Tree", y_pred_dt)
+print_predictions("Logistic Regression", y_pred_logistic)
+print_predictions("Random Forest", y_pred_rf)
+print_predictions("SGDClassifier", y_pred_sgd)
+print_predictions("GradientBoostingClassifier", y_pred_gb)
+print_predictions("Naive Bayes", y_pred_nb)
