@@ -1,6 +1,8 @@
 pandas
 nltk
 scikit-learn
+joblib
 matplotlib
 seaborn
-madaline
+tk
+ttkbootstrap

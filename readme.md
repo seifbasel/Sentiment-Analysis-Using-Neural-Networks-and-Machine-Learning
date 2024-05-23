@@ -1,6 +1,6 @@
 # Sentiment Analysis on Women's Clothing E-Commerce Reviews
 
-This project performs sentiment analysis on a dataset of women's clothing e-commerce reviews. It aims to classify reviews as positive or negative based on their text content. Various machine learning and neural network models are utilized for this task.
+This project performs sentiment analysis on a dataset of women's clothing e-commerce reviews. It aims to classify reviews as positive or negative based on their text content using various machine learning and neural network models.
 
 ## Overview
 
@@ -8,11 +8,17 @@ Sentiment analysis is a natural language processing (NLP) task that involves det
 
 ## Dataset
 
-The dataset used in this project is sourced from [Women's Clothing E-Commerce Reviews](https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews) dataset available on Kaggle. It contains reviews written by customers along with their ratings and additional information.
+The dataset used in this project is sourced from the [Women's Clothing E-Commerce Reviews](https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews) dataset available on Kaggle. It contains reviews written by customers along with their ratings and additional information.
 
 ## Preprocessing
 
-Before modeling, the review text undergoes preprocessing steps including lowercasing, tokenization, stop word removal, and stemming to prepare it for analysis.
+Before modeling, the review text undergoes preprocessing steps including:
+- Lowercasing
+- Tokenization
+- Stop word removal
+- Stemming
+
+These steps prepare the text for analysis.
 
 ## Models
 
@@ -36,23 +42,34 @@ The following models are trained and evaluated for sentiment analysis:
 
 Each model's performance is evaluated using accuracy and confusion matrix metrics. Additionally, confusion matrices are visualized to provide a clear understanding of classification results.
 
+## GUI Application
+
+A GUI application is provided to input new reviews and predict their sentiment using the trained models. The GUI is built using Tkinter and ttkbootstrap for enhanced styling.
+
 ## Usage
 
-To run the project:
+### Prerequisites
 
 1. Install the required dependencies mentioned in `requirements.txt`:
-    ```
+    ```bash
     pip install -r requirements.txt
     ```
 
 2. Download the dataset from [Kaggle](https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews) and place it in the project directory.
 
-3. Run the `sentiment_analysis.py` script to preprocess the data, train the models, and evaluate their performance:
-    ```
+### Running the Project
+
+1. Run the `sentiment_analysis.py` script to preprocess the data, train the models, and evaluate their performance:
+    ```bash
     python sentiment_analysis.py
     ```
 
-## Example Predictions
+2. Run the `sentiment_analysis_gui.py` script to launch the GUI application:
+    ```bash
+    python sentiment_analysis_gui.py
+    ```
+
+### Example Predictions
 
 After training, the models can make predictions on new reviews. Here are predictions on a few sample reviews:
 
@@ -61,10 +78,19 @@ After training, the models can make predictions on new reviews. Here are predict
 - "very bad" - Predicted Sentiment: Negative
 - "bad quality" - Predicted Sentiment: Negative
 
+## Requirements
+
+The project requires the following Python packages:
+
+```plaintext
+pandas
+nltk
+scikit-learn
+joblib
+matplotlib
+seaborn
+tk
+ttkbootstrap
 ## Contributors
 
-- [seif basel](https://github.com/seifbasel)
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+[text](https://github.com/seifbasel)

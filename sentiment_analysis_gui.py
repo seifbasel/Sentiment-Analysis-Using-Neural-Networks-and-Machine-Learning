@@ -12,21 +12,21 @@ nltk.download('stopwords')
 
 # Load the trained models and the TF-IDF vectorizer
 models = {
-    "Logistic Regression": joblib.load('logistic_model.pkl'),
-    "SGD": joblib.load('sgd_model.pkl'),
-    "SVM": joblib.load('svm_model.pkl'),
-    "KNN": joblib.load('knn_model.pkl'),
-    "Random Forest": joblib.load('rf_model.pkl'),
-    "Decision Tree": joblib.load('dt_model.pkl'),
-    "Gradient Boosting": joblib.load('gb_model.pkl'),
-    "Naive Bayes": joblib.load('nb_model.pkl'),
-    "Perceptron": joblib.load('perceptron_model.pkl'),
-    "MLP Feedforward": joblib.load('mlp_feedforward_model.pkl'),
-    "MLP Backpropagation": joblib.load('mlp_backpropagation_model.pkl'),
-    "Adaline": joblib.load('adaline_model.pkl'),
-    "MADALINE": joblib.load('madaline_model.pkl')
+    "Logistic Regression": joblib.load('models/logistic_model.pkl'),
+    "SGD": joblib.load('models/sgd_model.pkl'),
+    "SVM": joblib.load('models/svm_model.pkl'),
+    "KNN": joblib.load('models/knn_model.pkl'),
+    "Random Forest": joblib.load('models/rf_model.pkl'),
+    "Decision Tree": joblib.load('models/dt_model.pkl'),
+    "Gradient Boosting": joblib.load('models/gb_model.pkl'),
+    "Naive Bayes": joblib.load('models/nb_model.pkl'),
+    "Perceptron": joblib.load('models/perceptron_model.pkl'),
+    "MLP Feedforward": joblib.load('models/mlp_feedforward_model.pkl'),
+    "MLP Backpropagation": joblib.load('models/mlp_backpropagation_model.pkl'),
+    "Adaline": joblib.load('models/adaline_model.pkl'),
+    "MADALINE": joblib.load('models/madaline_model.pkl')
 }
-tfidf_vectorizer = joblib.load('tfidf_vectorizer.pkl')
+tfidf_vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
 
 # Function to preprocess the input text
 def preprocess_input(text):
